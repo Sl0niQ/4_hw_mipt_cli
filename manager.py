@@ -27,11 +27,16 @@ def copy_file(args):
         else:
             print(f'error: file {args.origin} does not exist')
     else:
-        print('error: file name missing')    
+        print('error: <file name> missing')
+    return 0   
 
 #(легкое) команда которая удаляет папку 
 #(пример использования: manager delete folder_name)
 def remove_folder(args):
+    if os.path.isdir(origin_directory):
+        folder = os.path.dirname(args.target)
+    else:
+        print(f'error: folder {target_directory} does not exist')
     print('remove_folder')
 
 #(легкое) команда которая удаляет файл 
@@ -52,7 +57,7 @@ actions = {
 
 #parser object to get args from the cli
 parser = argparse.ArgumentParser(
-                 prog = 'file system manager',
+                 prog = 'file manager',
                  description = 'allows you to perform some actions with a file',
                  epilog = 'examples:\n manager copy <file_name>'
 )
@@ -65,13 +70,10 @@ parser.add_argument('--target', '-t', type = str, default = '', help = 'target f
 args = parser.parse_args()
 
 #call a valid function
-if args.action in actions:
-    actions[args.action](args)  # Передаем args в функцию
+if args.action in actions:   
+    actions[args.action](args)  
 else:
-    print('unknown action')
-    sys.exit(1)
-
-print('we are here')
+   print('error: unknown argument <action>')
 
 #parser.add_argument("--output", "-o", default="out.txt", help="Выходной файл")
 #parser.add_argument("--mode", choices=["fast", "slow"], default="fast")
