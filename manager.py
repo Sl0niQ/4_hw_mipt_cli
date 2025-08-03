@@ -1,4 +1,4 @@
-#manager copy test.txt
+#ma
 import argparse
 import os
 
