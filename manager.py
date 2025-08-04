@@ -87,14 +87,14 @@ parser = argparse.ArgumentParser(
                  epilog = 'examples:\n manager copy <file_name>'
 )
 
-#declaring manager arguments
+#manager arguments declaring
 parser.add_argument('action', type = str, help = 'allowed action')
 parser.add_argument('--origin', '-o', type = str, default = '', help = 'original file name or path')
 parser.add_argument('--target', '-t', type = str, default = '', help = 'target file name or path')
 
 args = parser.parse_args()
 
-#call a valid function
+#valid function call
 if args.action in actions:   
     actions[args.action](args)  
 else:

@@ -8,6 +8,6 @@ manager.py copy -o <filename1> -t <filename2> copies the file <filename> to the 
 manager.py copy -o <filename1> -t <path> copies the file <filename> to custom folder <path> with new file name <filename.copy>
 manager.py copy -o <filename1> -t <path/filename2> copies the file <filename> to custom folder <path> with new file name <filename2>
 
-### 4.2 : deletes the selected file
+### 4.2 rmfile: deletes the selected file
 format:
 manager.py rmfile -o <path/filename>
