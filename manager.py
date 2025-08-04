@@ -7,7 +7,10 @@ import os
 
 #(легкое) команда которая позволяет копировать файл 
 #(пример использования: manager copy test.txt)
-def copy_file(args):    
+def copy_file(args):
+    """
+       Copies a file 
+    """      
     if args.origin:
         if os.path.isfile(args.origin):
             if not os.path.basename(args.target):
@@ -24,10 +27,13 @@ def copy_file(args):
                 os.system(f"copy {args.origin} {args.target}")
             else:
                 print(f'error: folder {target_directory} does not exist')
+                return -1
         else:
             print(f'error: file {args.origin} does not exist')
+            return -1
     else:
         print('error: <file name> missing')
+        return -1
     return 0   
 
 #(легкое) команда которая удаляет папку 
@@ -35,14 +41,33 @@ def copy_file(args):
 def remove_folder(args):
     if os.path.isdir(origin_directory):
         folder = os.path.dirname(args.target)
+        for item in os.listdir(folder):
+            pass
+            #if 
+        print('remove_folder')
+        return 0
     else:
         print(f'error: folder {target_directory} does not exist')
-    print('remove_folder')
+        return -1
+    
 
 #(легкое) команда которая удаляет файл 
 #(пример использования: manager delete file_name)
 def remove_file(args):
-    print('remove_file')
+    """
+        Deletes a file
+    """
+    print(f'args = {args}')
+    if args.origin:
+        if os.path.isfile(args.origin):
+            os.remove(args.origin)
+            return 0
+        else:
+            print(f'error: file <{args.origin}> does not exist')
+            return -1
+    else:
+        print('error: <file name> missing')
+        return -1 
 
 def analyze(args):
     print('analyze')
@@ -64,7 +89,7 @@ parser = argparse.ArgumentParser(
 
 #declaring manager arguments
 parser.add_argument('action', type = str, help = 'allowed action')
-parser.add_argument('--origin', '-o', type = str, help = 'original file name or path')
+parser.add_argument('--origin', '-o', type = str, default = '', help = 'original file name or path')
 parser.add_argument('--target', '-t', type = str, default = '', help = 'target file name or path')
 
 args = parser.parse_args()
@@ -73,7 +98,7 @@ args = parser.parse_args()
 if args.action in actions:   
     actions[args.action](args)  
 else:
-   print('error: unknown argument <action>')
+    print('error: unknown argument <action>')
 
 #parser.add_argument("--output", "-o", default="out.txt", help="Выходной файл")
 #parser.add_argument("--mode", choices=["fast", "slow"], default="fast")
