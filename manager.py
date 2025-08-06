@@ -22,30 +22,30 @@ def copy_file(args):
                 args.target = os.path.join(target_directory, target_filename)
                 copy_number = 1
                 while os.path.isfile(args.target):
-                    args.target = os.path.join(target_directory, f'{target_filename}.copy({copy_number})')
+                    args.target = os.path.join(target_directory, f"{target_filename}.copy({copy_number})")
                     copy_number += 1                
                 os.system(f"copy {args.origin} {args.target}")
             else:
-                print(f'error: folder {target_directory} does not exist')
+                print(f"error: folder {target_directory} does not exist")
                 return -1
         else:
-            print(f'error: file {args.origin} does not exist')
+            print(f"error: file {args.origin} does not exist")
             return -1
     else:
-        print('error: <file name> missing')
+        print("error: <file name> missing")
         return -1
     return 0   
 
 #(легкое) команда которая удаляет папку 
 #(пример использования: manager delete folder_name)
 def remove_folder(args):
-    print(f'args = {args}')
-    print(f'args.origin = {args.origin}')
+    #print(f"args = {args}")
+    #print(f"args.origin = {args.origin}")
     if args.origin:
         if os.path.dirname(args.origin):
         #if os.path.isdir(args.origin):
             folder = os.path.abspath(args.origin)
-            print(f'folder = {folder}')
+            #print(f'folder = {folder}')
             for item in os.listdir(folder):
                 local_path = os.path.join(folder, item)
                 if os.path.isdir(local_path):
@@ -60,7 +60,7 @@ def remove_folder(args):
             return -1
     else:
         print('error: <folder name> missing')
-
+        return -1
 
 #(легкое) команда которая удаляет файл 
 #(пример использования: manager delete file_name)
