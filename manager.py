@@ -111,11 +111,3 @@ if args.action in actions:
 else:
     print('error: unknown argument <action>')
 
-#parser.add_argument("--output", "-o", default="out.txt", help="Выходной файл")
-#parser.add_argument("--mode", choices=["fast", "slow"], default="fast")
-
-#if not all([args.action, args.file_name]):
-#    parser.print_help()
-#    sys.exit(1)
-
-#current_dir = os.getcwd()
