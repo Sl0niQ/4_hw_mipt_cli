@@ -52,7 +52,4 @@ def remove_environment(test_path = '') -> int:
         return 0
     else:
         print(f'test environment has already been removed')
-        return -1 
-
-#create_environment()
-remove_environment()
+        return -1

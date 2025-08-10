@@ -56,10 +56,10 @@ def remove_folder(args):
             os.rmdir(folder)
             return 0
         else:
-            print(f'error: wrong path or folder <{args.origin}> does not exist')
+            print(f"error: wrong path or folder <{args.origin}> does not exist")
             return -1
     else:
-        print('error: <folder name> missing')
+        print("error: <folder name> missing")
         return -1
 
 #(легкое) команда которая удаляет файл 
@@ -67,21 +67,20 @@ def remove_folder(args):
 def remove_file(args):
     """
         Deletes a file
-    """
-    print(f'args = {args}')
+    """    
     if args.origin:
         if os.path.isfile(args.origin):
             os.remove(args.origin)
             return 0
         else:
-            print(f'error: file <{args.origin}> does not exist')
+            print(f"error: file <{args.origin}> does not exist")
             return -1
     else:
-        print('error: <file name> missing')
+        print("error: <file name> missing")
         return -1 
 
 def analyze(args):
-    print('analyze')
+    print("analyze")
 
 #dictionary of valid actions
 actions = {
@@ -91,31 +90,28 @@ actions = {
     "analyze": analyze
 }
 
-#parser object to get args from the cli
-parser = argparse.ArgumentParser(
-                 prog = 'file manager',
-                 description = 'allows you to perform some actions with a file',
-                 epilog = 'examples:\n manager copy <file_name>'
-)
+def main():
+    #parser object to get args from the cli
+    parser = argparse.ArgumentParser(
+                     prog = "file manager",
+                     description = "allows you to perform some actions with a file",
+                     epilog = "examples:\n manager copy <file_name>"
+    )
 
-#manager arguments declaring
-parser.add_argument('action', type = str, help = 'allowed action')
-parser.add_argument('--origin', '-o', type = str, default = '', help = 'original file name or path')
-parser.add_argument('--target', '-t', type = str, default = '', help = 'target file name or path')
+    #manager arguments declaring
+    parser.add_argument("action", type = str, help = "allowed action")
+    parser.add_argument("--origin", "-o", type = str, default = "", help = "original file name or path")
+    parser.add_argument("--target", "-t", type = str, default = "", help = "target file name or path")
 
-args = parser.parse_args()
+    args = parser.parse_args()
 
-#valid function call
-if args.action in actions:   
-    actions[args.action](args)  
-else:
-    print('error: unknown argument <action>')
+    #valid function call
+    if args.action in actions:
+        print(args) 
+        actions[args.action](args)  
+    else:
+        print("error: unknown argument <action>")
 
-#parser.add_argument("--output", "-o", default="out.txt", help="Выходной файл")
-#parser.add_argument("--mode", choices=["fast", "slow"], default="fast")
+if __name__ == "__main__":
+    main()
 
-#if not all([args.action, args.file_name]):
-#    parser.print_help()
-#    sys.exit(1)
-
-#current_dir = os.getcwd()
