@@ -43,10 +43,8 @@ def remove_folder(args):
         python manager.py rmfold -o <path>
     """   
     if args.origin:
-        if os.path.dirname(args.origin):
-        #if os.path.isdir(args.origin):
-            folder = os.path.abspath(args.origin)
-            #print(f'folder = {folder}')
+        folder = os.path.abspath(args.origin)
+        if os.path.isdir(folder):                        
             for item in os.listdir(folder):
                 local_path = os.path.join(folder, item)
                 if os.path.isdir(local_path):
@@ -54,10 +52,10 @@ def remove_folder(args):
                     remove_folder(args)
                 else:
                     os.remove(local_path)
-            os.rmdir(folder)
+            os.rmdir(folder)            
             return 0
         else:
-            print(f"error: wrong path or folder <{args.origin}> does not exist")
+            print(f"error: folder <{args.origin}> does not exist")
             return -1
     else:
         print("error: <folder name> missing")
@@ -73,6 +71,7 @@ def remove_file(args):
     if args.origin:
         if os.path.isfile(args.origin):
             os.remove(args.origin)
+            print(f"file {args.origin} has been deleted")
             return 0
         else:
             print(f"error: file <{args.origin}> does not exist")
@@ -113,17 +112,17 @@ def analyze(args):
                         fold_size = folder_size(local_path)
                         object_name = os.path.basename(local_path)
                         object_name = f"{object_name[:18]}.." if len(object_name) > 20 else object_name
-                        print(f"  {object_name:<20} {'<dir>':<5} {fold_size:>15} байт")
+                        print(f"  {object_name:<20} {'<dir>':<5} {fold_size:>15} bytes")
                         total_size += fold_size
                     else:
                         file_size = os.path.getsize(local_path)
                         object_name = os.path.basename(local_path)
                         object_name = f"{object_name[:18]}.." if len(object_name) > 20 else object_name
-                        print(f"  {object_name:<26} {file_size:>15} байт")
+                        print(f"  {object_name:<26} {file_size:>15} bytes")
                         total_size += file_size
-                print(f"{'-' * 49}\ntotal {' ' * 22} {total_size:>15} байт")
+                print(f"{'-' * 49}\ntotal {' ' * 22} {total_size:>15} bytes")
             else:
-                print(f"{os.path.basename(full_path):<27} {os.path.getsize(full_path):>16} байт")          
+                print(f"{os.path.basename(full_path):<27} {os.path.getsize(full_path):>16} bytes")          
             return 0
         else:
             print(f"error: file or folder <{args.origin}> does not exist")
@@ -141,11 +140,18 @@ actions = {
 }
 
 def main():
+    """
+        file manager for CLI
+        removes file 
+        removes folder
+        copies file
+        analyzes folder
+    """
     #parser object to get args from the cli
     parser = argparse.ArgumentParser(
                      prog = "file manager",
-                     description = "allows you to perform some actions with a file",
-                     epilog = "examples:\n manager copy <file_name>"
+                     description = "allows you to perform some actions with a file or folder",
+                     epilog = "examples:\n manager copy -o <file_name>"
     )
 
     #manager arguments declaring
