@@ -21,8 +21,8 @@ format (run from console):
     python manager.py analize -o <path>; can be used relative or absolute path to the file or directory
 
 ### 4.2 test environment (for tests only)  
-### 4.2.1 create_environment(): 
-    creates folders and files in the current directory for running tests
+### 4.2.1 create_environment():
+creates folders and files in the current directory for running tests
 ### 4.2.2 remove_environment():
 removes test environment
 
