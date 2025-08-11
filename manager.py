@@ -1,23 +1,22 @@
-#ma
+#file manager
 import argparse
 import os
-
-#print(globals().get('origin', 'Не найдено'))  # Поиск в глобальных переменных
-#print(locals().get('origin', 'Не найдено'))  # Поиск в локальных переменных
 
 #(легкое) команда которая позволяет копировать файл 
 #(пример использования: manager copy test.txt)
 def copy_file(args):
     """
-       Copies a file 
+       copies a file
+       python manager.py copy -o <filename> [-t <filename>] 
     """      
     if args.origin:
         if os.path.isfile(args.origin):
             if not os.path.basename(args.target):
-                target_filename = os.path.basename(args.origin)
+                target_filename = os.path.basename(args.origin)                
+                args.target = target_filename               
             else:
                 target_filename = os.path.basename(args.target)
-            target_directory = os.path.dirname(args.target)
+            target_directory = os.path.dirname(os.path.abspath(args.target))           
             if os.path.isdir(target_directory):                
                 args.target = os.path.join(target_directory, target_filename)
                 copy_number = 1
@@ -39,8 +38,10 @@ def copy_file(args):
 #(легкое) команда которая удаляет папку 
 #(пример использования: manager delete folder_name)
 def remove_folder(args):
-    #print(f"args = {args}")
-    #print(f"args.origin = {args.origin}")
+    """
+        deletes a folder
+        python manager.py rmfold -o <path>
+    """   
     if args.origin:
         if os.path.dirname(args.origin):
         #if os.path.isdir(args.origin):
@@ -66,7 +67,8 @@ def remove_folder(args):
 #(пример использования: manager delete file_name)
 def remove_file(args):
     """
-        Deletes a file
+        deletes a file
+        python manager.py rmfile -o <filename>
     """    
     if args.origin:
         if os.path.isfile(args.origin):
@@ -79,8 +81,56 @@ def remove_file(args):
         print("error: <file name> missing")
         return -1 
 
+def folder_size(fpath):
+    """
+        calculates folder size
+    """
+    total_size = 0
+    for item in os.listdir(fpath):
+        item_path = os.path.join(fpath, item)
+        if os.path.isdir(item_path):                
+            total_size += folder_size(item_path)
+        else:
+            total_size += os.path.getsize(item_path)
+    return total_size  
+
+#(сложное) команда запускающая анализ всех вложенных папок и файлов, и выводящая информацию о том насколько 
+#большие файлы находятся на уровне вызова. Способ вывода любой (но только через консоль), например: manager analyse
 def analyze(args):
-    print("analyze")
+    """
+        analyzes the folder structure
+        python manager.py analyze -o <path>
+    """
+    if args.origin:
+        if os.path.exists(args.origin):
+            full_path = os.path.abspath(args.origin)
+            if os.path.isdir(full_path):
+                print(f"{os.path.basename(full_path)}")
+                total_size = 0
+                for item in os.listdir(full_path):
+                    local_path = os.path.join(full_path, item)
+                    if os.path.isdir(local_path):
+                        fold_size = folder_size(local_path)
+                        object_name = os.path.basename(local_path)
+                        object_name = f"{object_name[:18]}.." if len(object_name) > 20 else object_name
+                        print(f"  {object_name:<20} {'<dir>':<5} {fold_size:>15} байт")
+                        total_size += fold_size
+                    else:
+                        file_size = os.path.getsize(local_path)
+                        object_name = os.path.basename(local_path)
+                        object_name = f"{object_name[:18]}.." if len(object_name) > 20 else object_name
+                        print(f"  {object_name:<26} {file_size:>15} байт")
+                        total_size += file_size
+                print(f"{'-' * 49}\ntotal {' ' * 22} {total_size:>15} байт")
+            else:
+                print(f"{os.path.basename(full_path):<27} {os.path.getsize(full_path):>16} байт")          
+            return 0
+        else:
+            print(f"error: file or folder <{args.origin}> does not exist")
+            return -1
+    else:
+        print("error: <file or folder name> missing")
+        return -1    
 
 #dictionary of valid actions
 actions = {
@@ -107,11 +157,10 @@ def main():
 
     #valid function call
     if args.action in actions:
-        print(args) 
+        #print(args) 
         actions[args.action](args)  
     else:
         print("error: unknown argument <action>")
 
 if __name__ == "__main__":
     main()
-
