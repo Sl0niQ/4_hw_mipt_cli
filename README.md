@@ -13,7 +13,8 @@ format: (run from console)
 python manager.py rmfile -o <path\filename> deletes the file <filename> from custom folder
 python manager.py rmfile -o <filename> deletes the file <filename> from current folder
 ### 4.1.3 rmfolder: deletes the selected folder  
-format: (run from console)  
+format: (run from console)
+  
 python manager.py rmfile -o <path> deletes the folder <path>; can be used relative or absolute path to the directory
 
 ### 4.1.4 analyze: displays the selected folder structure and size, or file size 
