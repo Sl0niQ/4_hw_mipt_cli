@@ -16,6 +16,10 @@ manager.py rmfile -o <filename> deletes the file <filename> from current folder
 format:  
 manager.py rmfile -o <path> deletes the folder <path>; can be used relative or absolute path to the directory
 
+### 4.1.4 analyze: displays the selected folder structure and size, or file size 
+format:  
+manager.py analize -o <path>; can be used relative or absolute path to the file or directory
+
 ### 4.2 test environment (for running tests only)  
 ### 4.2.1 create_environment(): 
 creates folders and files in the current directory for running tests
