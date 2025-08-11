@@ -23,7 +23,7 @@ format (run from console):
 ### 4.2 test environment (for tests only)  
 ### 4.2.1 create_environment(): 
     creates folders and files in the current directory for running tests
-### 4.2.2 remove_environment(): 
+### 4.2.2 remove_environment():
 removes test environment
 
 ### 4.3 tests for manager features using test environment 
@@ -31,5 +31,5 @@ removes test environment
 	- delete file feature tests
 	- delete folder feature tests
 	- analyze folder feature tests
-format (run from console): 
-    python tests.py
+format (run from console):
+python tests.py
