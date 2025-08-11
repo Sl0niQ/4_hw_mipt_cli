@@ -31,5 +31,5 @@ removes test environment
 	- delete file feature tests
 	- delete folder feature tests
 	- analyze folder feature tests
-format (run from console):
+format (run from console):  
 python tests.py
