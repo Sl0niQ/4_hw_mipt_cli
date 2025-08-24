@@ -17,9 +17,14 @@ class TestCopyFiles(unittest.TestCase):
 		"""
 		test_environment.create_environment()
 		args = MagicMock()
-		args.origin = "test\\test.txt"
-		args.target = "test\\test.txt"
-		new_file_name = "test\\test.txt.copy(1)"
+		#args.origin = "test\\test.txt"
+		args.origin = os.path.join(os.getcwd(), "test", "test.txt")
+		######
+		print(args.origin)
+		#args.target = "test\\test.txt"
+		args.target = os.path.join(os.getcwd(), "test", "test.txt")
+		#new_file_name = "test\\test.txt.copy(1)"
+		new_file_name = os.path.join(os.getcwd(), "test", "test.txt.copy(1)")
 		self.assertFalse(os.path.exists(new_file_name)) 	# there is no file <new_file_name>     
 		self.assertEqual(copy_file(args), 0)  				# copying completed successfully (return 0)
 		self.assertTrue(os.path.exists(new_file_name))  	# new file exists
@@ -31,9 +36,12 @@ class TestCopyFiles(unittest.TestCase):
 		"""
 		test_environment.create_environment()
 		args = MagicMock()
-		args.origin = "test\\testt.txt"
-		args.target = "test\\testtt.txt"
-		new_file_name = "test\\testtt.txt"
+		#args.origin = "test\\testt.txt"
+		args.origin = os.path.join(os.getcwd(), "test", "testt.txt")
+		#args.target = "test\\testtt.txt"
+		args.target = os.path.join(os.getcwd(), "test", "testtt.txt")
+		#new_file_name = "test\\testtt.txt"
+		new_file_name = os.path.join(os.getcwd(), "test", "testtt.txt")
 		self.assertFalse(os.path.exists(new_file_name))		# there is no file <new_file_name>    
 		self.assertEqual(copy_file(args), -1)  				# copying failed (return -1)
 		self.assertFalse(os.path.exists(new_file_name)) 	# there is no file <new_file_name>
@@ -46,7 +54,8 @@ class TestDeleteFiles(unittest.TestCase):
 		"""
 		test_environment.create_environment()
 		args = MagicMock()
-		file_to_remove = "test\\test.txt"
+		#file_to_remove = "test\\test.txt"
+		file_to_remove = os.path.join(os.getcwd(), "test", "test.txt")
 		args.origin = file_to_remove
 
 		self.assertTrue(os.path.exists(file_to_remove)) 	# file <file_to_remove> exists    
@@ -60,7 +69,8 @@ class TestDeleteFiles(unittest.TestCase):
 		"""
 		test_environment.create_environment()
 		args = MagicMock()
-		file_to_remove = "testtt\\test.txt.copy"
+		#file_to_remove = "testtt\\test.txt.copy"
+		file_to_remove = os.path.join(os.getcwd(), "test", "test.txt.copy")
 		args.origin = file_to_remove
 
 		self.assertFalse(os.path.exists(file_to_remove))	# there is no file <file_to_remove>    
@@ -75,7 +85,8 @@ class TestDeleteFolders(unittest.TestCase):
 		"""
 		test_environment.create_environment()
 		args = MagicMock()
-		folder_to_remove = "test\\test1"
+		#folder_to_remove = "test\\test1"
+		folder_to_remove = os.path.join(os.getcwd(), "test", "test1")
 		args.origin = folder_to_remove
 
 		self.assertTrue(os.path.exists(folder_to_remove)) 	# file <file_to_remove> exists    
@@ -89,7 +100,8 @@ class TestDeleteFolders(unittest.TestCase):
 		"""
 		test_environment.create_environment()
 		args = MagicMock()
-		folder_to_remove = "testtt\\testtt"
+		#folder_to_remove = "testtt\\testtt"
+		folder_to_remove = os.path.join(os.getcwd(), "test", "testtt")
 		args.origin = folder_to_remove
 
 		self.assertFalse(os.path.exists(folder_to_remove))	# there is no file <file_to_remove>    
@@ -104,8 +116,9 @@ class TestAnalyze(unittest.TestCase):
 		"""
 		test_environment.create_environment()
 		args = MagicMock()
-		folder_to_analize = "test\\test1"
-		args.origin = folder_to_analize
+		#folder_to_analize = "test\\test1"
+		folder_to_analyze = os.path.join(os.getcwd(), "test", "test1")
+		args.origin = folder_to_analyze
 		self.assertEqual(analyze(args), 0)  			# deleting completed successfully (return 0)
 		test_environment.remove_environment()
 		
@@ -115,8 +128,9 @@ class TestAnalyze(unittest.TestCase):
 		"""
 		test_environment.create_environment()
 		args = MagicMock()
-		folder_to_analize = "testtt\\testtt"
-		args.origin = folder_to_analize
+		#folder_to_analize = "testtt\\testtt"
+		folder_to_analyze = os.path.join(os.getcwd(), "test", "testtt")
+		args.origin = folder_to_analyze
 		self.assertEqual(remove_file(args), -1)  			# deleting failed (return -1)
 		test_environment.remove_environment()		
 
