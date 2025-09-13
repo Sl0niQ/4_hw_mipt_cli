@@ -5,7 +5,7 @@
 #### 4.1.1 copy: copies selected file to any folder  
 **format** (run from console)  
 copies file "filename" to the same folder with new file name "filename.copy":  
-_- python manager.py copy -o {filename}_  
+_  python manager.py copy -o {filename}_  
 copies file "filename1" to the same folder with new file name "filename2":  
 _- python manager.py copy -o {filename1} -t {filename2}_  
 copies file "filename" to custom folder "path" with file name "filename":  
