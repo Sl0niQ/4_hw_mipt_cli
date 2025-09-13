@@ -3,7 +3,15 @@ import argparse
 import os
 
 #(легкое) команда которая позволяет копировать файл 
-#(пример использования: manager copy test.txt)
+def cross_platform_copy(copy_from, copy_to):
+    """
+        low level copy for different os
+    """
+    if os.name == "nt":
+        os.system(f"copy {copy_from} {copy_to}")
+    else:
+        os.system(f"cp {copy_from} {copy_to}")
+
 def copy_file(args):
     """
        copies a file
@@ -23,7 +31,8 @@ def copy_file(args):
                 while os.path.isfile(args.target):
                     args.target = os.path.join(target_directory, f"{target_filename}.copy({copy_number})")
                     copy_number += 1                
-                os.system(f"copy {args.origin} {args.target}")
+                #os.system(f"copy {args.origin} {args.target}")
+                cross_platform_copy(args.origin, args.target)
             else:
                 print(f"error: folder {target_directory} does not exist")
                 return -1
@@ -36,7 +45,6 @@ def copy_file(args):
     return 0   
 
 #(легкое) команда которая удаляет папку 
-#(пример использования: manager delete folder_name)
 def remove_folder(args):
     """
         deletes a folder
@@ -62,7 +70,6 @@ def remove_folder(args):
         return -1
 
 #(легкое) команда которая удаляет файл 
-#(пример использования: manager delete file_name)
 def remove_file(args):
     """
         deletes a file
