@@ -5,13 +5,20 @@
 #### 4.1.1 copy: copies selected file to any folder  
 **format** (run from console)  
 copies file "filename" to the same folder with new file name "filename.copy":  
-_  python manager.py copy -o {filename}_  
+```
+python manager.py copy -o {filename}
+```
 copies file "filename1" to the same folder with new file name "filename2":  
-_- python manager.py copy -o {filename1} -t {filename2}_  
+```
+python manager.py copy -o {filename1} -t {filename2}
+```
 copies file "filename" to custom folder "path" with file name "filename":  
-    _python manager.py copy -o {filename} -t {path}_  
+```
+python manager.py copy -o {filename} -t {path}
+```
 copies file "filename1" to custom folder "path" with new file name "filename2":
-```python manager.py copy -o {filename1} -t {path\filename2}
+```
+python manager.py copy -o {filename1} -t {path\filename2}
 ``` 
 #### 4.1.2 rmfile: deletes selected file  
 format (run from console)  
