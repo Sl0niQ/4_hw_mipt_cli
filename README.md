@@ -11,8 +11,7 @@ _- python manager.py copy -o {filename1} -t {filename2}_
 copies file "filename" to custom folder "path" with file name "filename":  
     _python manager.py copy -o {filename} -t {path}_  
 copies file "filename1" to custom folder "path" with new file name "filename2":
-```  
-_python manager.py copy -o {filename1} -t {path\filename2}_
+```python manager.py copy -o {filename1} -t {path\filename2}
 ``` 
 #### 4.1.2 rmfile: deletes selected file  
 format (run from console)  
