@@ -3,7 +3,7 @@
 
 ### 4.1 file manager for console  
 #### 4.1.1 copy: copies selected file to any folder  
-**format** (run from console)
+**format** (run from console)  
 #```bash  
 # copies file "filename" to the same folder with new file name "filename.copy":  
 _python manager.py copy -o {filename}_  
