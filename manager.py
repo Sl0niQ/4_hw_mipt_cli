@@ -70,8 +70,8 @@ def remove_folder(args):
                 return -1
 
         except PermissionError:
-        print(f"error: permission denied for folder <{args.origin}>")
-        return -1
+            print(f"error: permission denied for folder <{args.origin}>")
+            return -1
         
         except OSError as e:
             print(f"error: cannot delete folder <{args.origin}> - {e}")
