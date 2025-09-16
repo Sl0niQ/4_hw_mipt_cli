@@ -2,7 +2,7 @@ import test_environment
 import unittest
 import os
 from unittest.mock import MagicMock
-from manager import copy_file, remove_file, remove_folder, analyze
+from cli_lib import copy_file, remove_file, remove_folder, analyze
 
 #unittest.main()
 #Это встроенный метод фреймворка unittest, который:
@@ -133,7 +133,6 @@ class TestAnalyze(unittest.TestCase):
 		args.origin = folder_to_analyze
 		self.assertEqual(remove_file(args), -1)  			# deleting failed (return -1)
 		test_environment.remove_environment()		
-
 
 if __name__ == "__main__":
 	unittest.main()	
